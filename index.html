@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/reset.css">
+    <link rel="stylesheet" href="./styles/styles.css">
+    <title>file_naming_app</title>
+  </head>
+  <body>
+    <div class="app-wrapper">
+      <header class="main-header">
+        <h1 class="main-heading">file_naming_app</h1>
+      </header>
+      <main class="content-container">
+        <form class="file-dropper-form" enctype="multipart/form-data">
+          <label class="file-dropper-label" for="file-dropper">Drag and drop or click to browse . . .</label>
+          <input
+            class="file-dropper hidden"
+            type="file"
+            name="file-dropper"
+            id="file-dropper"
+            multiple
+          >
+        </form>
+        <div class="div"></div>
+      </main>
+    </div>
+  </body>
+  <script src="./scripts/jquery.js"></script>
+  <script src="./scripts/scripts.js"></script>
+</html>
