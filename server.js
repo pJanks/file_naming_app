@@ -15,9 +15,9 @@ const listener = require('socket.io')(server)
 listener.on('connection', (socket) => {
   console.log('something connected')
 
-  const log = fs.readFileSync('./log.log', { encoding:'utf8', flag:'r' })
+  // const log = fs.readFileSync('./log.log', { encoding:'utf8', flag:'r' })
   
-  fs.writeFileSync('./log.log', log ? `${log}\nsomething connected => ${new Date()}` : `something connected => ${new Date()}`)
+  // fs.writeFileSync('./log.log', log ? `${log}\nsomething connected => ${new Date()}` : `something connected => ${new Date()}`)
 
   socket.on('disconnect', () => {
     console.log('something disconnected')
