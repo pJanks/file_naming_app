@@ -11,30 +11,30 @@ console.log(
 )
 
 const fileDropperLabel = $('.file-dropper-label')
-const fileDropper = $('.file-dropper')
 
 const handleFiles = async (e) => {
   e.preventDefault()
-  // e.cancelBubble = true
-  // if (e.stopPropagation) e.stopPropagation()
 
   if (e.type === 'drop') {
 
     const fileOrFiles = e.originalEvent.dataTransfer.files
     const formData = new FormData()
 
-    if (fileOrFiles.length > 1) {
+    if (!fileOrFiles.length) {
+      alert('you need to upload files !')
+    } else if (fileOrFiles.length > 1) {
       const keys = Object.keys(fileOrFiles)
       keys.forEach(key => {
         formData.append('file', fileOrFiles[key])
       })
-
-    } else if (!fileOrFiles.length) {
-
-      alert('you need to upload files')
-
+      for(var pair of formData.entries()) {
+        console.log(pair[1])
+      }
     } else {
       formData.append('file', fileOrFiles)
+      for(var pair of formData.entries()) {
+        console.log(pair[1])
+      }
     }
 
     const options = {
@@ -42,15 +42,11 @@ const handleFiles = async (e) => {
       headers: { "Content-Type": "application/json" },
       body: formData,
     }
-
     const json = await fetch('http://127.0.0.1:3001/rename', options)
     const response = await json.json()
 
-    console.log(response)
-
-  } else {
-    return
   }
+
 }
 
 // check for File API support

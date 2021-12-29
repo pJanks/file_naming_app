@@ -15,7 +15,7 @@
       </header>
       <main class="content-container">
         <form class="file-dropper-form" enctype="multipart/form-data">
-          <label class="file-dropper-label" for="file-dropper">Drag and drop or click to browse . . .</label>
+          <label class="file-dropper-label" for="file-dropper">Drag and drop files or click to browse . . .</label>
           <input
             class="file-dropper hidden"
             type="file"
@@ -24,10 +24,18 @@
             multiple
           >
         </form>
-        <div class="div"></div>
       </main>
     </div>
   </body>
+  <script src="/socket.io/socket.io.js"></script>
   <script src="./scripts/jquery.js"></script>
   <script src="./scripts/scripts.js"></script>
+  <script>
+    const socket = io()
+    socket.on('custom_refresh', (data) => {
+      setTimeout(() => {
+        location.reload()
+      }, 1000)
+    })
+  </script>
 </html>
