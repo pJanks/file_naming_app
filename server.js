@@ -60,7 +60,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage })
 
-app.post('/rename_one/:new_name/dir/:directory', upload.any('files'), (req, res) => {
+app.post('/rename_one/:new_name/:directory', upload.any('files'), (req, res) => {
   try {
     listener.emit('custom_refresh', { description: 'reload page on file upload' })
     res.sendStatus(200)
@@ -69,7 +69,7 @@ app.post('/rename_one/:new_name/dir/:directory', upload.any('files'), (req, res)
   }
 })
 
-app.post('/rename_multiple/:new_name/dir/:directory', upload.any('files'), (req, res) => {
+app.post('/rename_multiple/:new_name/:directory', upload.any('files'), (req, res) => {
   try {
     res.sendStatus(200)
     listener.emit('custom_refresh', { description: 'reload page on file upload' })

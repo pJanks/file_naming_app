@@ -17,13 +17,6 @@ const fileDropper = $('.file-dropper')
 const fileDropperForm = $('.file-dropper-form')
 const fileDropperLabel = $('.file-dropper-label')
 
-const refresh = () => {
-  console.log('refresh')
-  setTimeout(() => {
-    location.reload()
-  }, 3000)
-}
-
 const handleFileDrop = async (e) => {
   e.preventDefault()
 
@@ -62,7 +55,7 @@ const handleSubmit = async (e) => {
       body: formData,
     }
 
-    const response = await fetch(`http://127.0.0.1:3001/rename_one/${newName}/dir/${directory}`, options)
+    const response = await fetch(`http://127.0.0.1:3001/rename_one/${newName}/${directory}`, options)
     console.log(response)
 
   } else if (fileDropper.prop('files').length > 1) {
@@ -77,7 +70,7 @@ const handleSubmit = async (e) => {
       body: formData,
     }
 
-    const response = await fetch(`http://127.0.0.1:3001/rename_multiple/${newName}/dir/${directory}`, options)
+    const response = await fetch(`http://127.0.0.1:3001/rename_multiple/${newName}/${directory}`, options)
     console.log(response)
 
   } else if (fileOrFiles.length === 1) {
@@ -92,7 +85,7 @@ const handleSubmit = async (e) => {
       body: formData,
     }
 
-    const response = await fetch(`http://127.0.0.1:3001/rename_one/${newName}/dir/${directory}`, options)
+    const response = await fetch(`http://127.0.0.1:3001/rename_one/${newName}/${directory}`, options)
     console.log(response)
 
   } else if (fileOrFiles.length > 1) {
@@ -107,11 +100,17 @@ const handleSubmit = async (e) => {
       body: formData,
     }
 
-    const response = await fetch(`http://127.0.0.1:3001/rename_multiple/${newName}/dir/${directory}`, options)
+    const response = await fetch(`http://127.0.0.1:3001/rename_multiple/${newName}/${directory}`, options)
     console.log(response)
 
   } else {
-    console.log('something isn\'t right')
+    alert('something isn\'t right . . . make sure you selected files . . .')
+  }
+}
+
+const handleEnterButtonPress = (e) => {
+  if (e.key.toLowerCase() === 'enter') {
+    fileDropperLabel.click()
   }
 }
 
@@ -123,12 +122,7 @@ if (window.File && window.FileReader && window.FileList && window.Blob) {
 }
 
 fileDropperLabel.on('dragover', handleFileDrop)
-
 fileDropperLabel.on('dragenter', handleFileDrop)
-
-// handle file drop
 fileDropperLabel.on('drop', handleFileDrop)
-
-
+fileDropperLabel.on('keypress', handleEnterButtonPress)
 fileDropperForm.on('submit', handleSubmit)
-

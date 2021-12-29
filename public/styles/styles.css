@@ -47,6 +47,14 @@ body {
   padding: 75px 50px;
 }
 
+.file-dropper-label:hover {
+  background-color: #333;
+}
+
+.file-dropper-label:focus {
+  border: 6px solid #FFF;
+}
+
 .file-dropper {
   cursor: pointer;
 }
@@ -57,6 +65,10 @@ body {
   margin-top: 30px;
   padding: 5px;
   width: 400px;
+}
+
+.user-input:focus {
+  outline: 4px solid #FFF;
 }
 
 .submit-button {
@@ -70,7 +82,7 @@ body {
 }
 
 .submit-button:hover {
-  background-color: #111;
+  background-color: #333;
 }
 
 .submit-button:active {
