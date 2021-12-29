@@ -6,12 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles/reset.css">
     <link rel="stylesheet" href="./styles/styles.css">
-    <title>file_naming_app</title>
+    <!-- <title>file_naming_app</title> -->
+    <title>#######</title>
   </head>
   <body>
     <div class="app-wrapper">
       <header class="main-header">
-        <h1 class="main-heading">file_naming_app</h1>
+        <!-- <h1 class="main-heading">file_naming_app</h1> -->
+        <h1 class="main-heading">#######</h1>
       </header>
       <main class="content-container">
         <form class="file-dropper-form" enctype="multipart/form-data">
@@ -19,10 +21,23 @@
           <input
             class="file-dropper hidden"
             type="file"
-            name="file-dropper"
+            name="files"
             id="file-dropper"
             multiple
-          >
+          />
+          <input
+            class="new-name-input user-input"
+            type="text"
+            required
+            placeholder="Enter terms to prepend to filename . . ."
+          />
+          <input
+            class="directory-input user-input"
+            type="text"
+            required
+            placeholder="Enter a directory to store the files in . . ."
+          />
+          <button class="submit-button">Submit</button>
         </form>
       </main>
     </div>
@@ -35,7 +50,7 @@
     socket.on('custom_refresh', (data) => {
       setTimeout(() => {
         location.reload()
-      }, 1000)
+      }, 3000)
     })
   </script>
 </html>

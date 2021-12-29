@@ -1,17 +1,17 @@
-const express = require('express')
-const multer = require('multer') // used for file uploads
-const http = require('http')
+require('dotenv').config()
 const fs = require('fs')
 const path = require('path')
-require('dotenv').config()
+
+const express = require('express')
 const app = express()
 const port = process.env.PORT || 3001
+const http = require('http')
 
 const server = http.createServer(app).listen(port, () => console.log(`server running on port ${port}`))
 
-const listener = require('socket.io')(server)
+const multer = require('multer') // used for file uploads
 
-// verify socket is connected in console and load screen data
+const listener = require('socket.io')(server)
 listener.on('connection', (socket) => {
   console.log('something connected')
 
@@ -42,7 +42,38 @@ app.use((req, res, next) => { res.header("Access-Control-Allow-Origin", "*"); re
 
 app.get('/', (req, res) => res.sendFile(__dirname + '/index.html'))
 
-app.post('/rename', (req, res) => {
-  
-  console.log(req.body)
+if (!fs.existsSync('./uploads')) {
+  fs.mkdirSync('./uploads')
+}
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    if (!fs.existsSync(`./uploads/${req.params.directory}`)) {
+      fs.mkdirSync(`./uploads/${req.params.directory}`)
+    }
+    cb(null, `./uploads/${req.params.directory}`)
+  },
+  filename: (req, file, cb) => {
+    cb(null, `${req.params.new_name}_${file.originalname}`)
+  }
+})
+
+const upload = multer({ storage })
+
+app.post('/rename_one/:new_name/dir/:directory', upload.any('files'), (req, res) => {
+  try {
+    listener.emit('custom_refresh', { description: 'reload page on file upload' })
+    res.sendStatus(200)
+  } catch(err) {
+    res.sendStatus(400)
+  }
+})
+
+app.post('/rename_multiple/:new_name/dir/:directory', upload.any('files'), (req, res) => {
+  try {
+    res.sendStatus(200)
+    listener.emit('custom_refresh', { description: 'reload page on file upload' })
+  } catch(err) {
+    res.sendStatus(400)
+  }
 })

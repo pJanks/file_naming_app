@@ -10,43 +10,109 @@ console.log(
   `
 )
 
+const formData = new FormData()
+let fileOrFiles = []
+
+const fileDropper = $('.file-dropper')
+const fileDropperForm = $('.file-dropper-form')
 const fileDropperLabel = $('.file-dropper-label')
 
-const handleFiles = async (e) => {
+const refresh = () => {
+  console.log('refresh')
+  setTimeout(() => {
+    location.reload()
+  }, 3000)
+}
+
+const handleFileDrop = async (e) => {
   e.preventDefault()
 
   if (e.type === 'drop') {
-
-    const fileOrFiles = e.originalEvent.dataTransfer.files
-    const formData = new FormData()
-
-    if (!fileOrFiles.length) {
-      alert('you need to upload files !')
-    } else if (fileOrFiles.length > 1) {
+    fileOrFiles = e.originalEvent.dataTransfer.files
+    if (fileOrFiles.length > 1) {
       const keys = Object.keys(fileOrFiles)
       keys.forEach(key => {
-        formData.append('file', fileOrFiles[key])
+        formData.append('files', fileOrFiles[key])
       })
-      for(var pair of formData.entries()) {
-        console.log(pair[1])
-      }
     } else {
-      formData.append('file', fileOrFiles)
+      formData.append('file', fileOrFiles[0])
       for(var pair of formData.entries()) {
         console.log(pair[1])
       }
+    }
+  }
+}
+
+const handleSubmit = async (e) => {
+  e.preventDefault()
+
+  const newName = $('.new-name-input').val().replace(/\s+/g, '_')
+  const directory = $('.directory-input').val()
+  
+  if (fileDropper.prop('files').length === 1) {
+
+    formData.append('files', fileDropper.prop('files')[0])
+
+    for(var pair of formData.entries()) {
+      console.log(pair[1])
     }
 
     const options = {
       method: 'POST',
-      headers: { "Content-Type": "application/json" },
       body: formData,
     }
-    const json = await fetch('http://127.0.0.1:3001/rename', options)
-    const response = await json.json()
 
+    const response = await fetch(`http://127.0.0.1:3001/rename_one/${newName}/dir/${directory}`, options)
+    console.log(response)
+
+  } else if (fileDropper.prop('files').length > 1) {
+
+    const keys = Object.keys(fileDropper.prop('files'))
+    keys.forEach(key => {
+      formData.append('files', fileDropper.prop('files')[key])
+    })
+
+    const options = {
+      method: 'POST',
+      body: formData,
+    }
+
+    const response = await fetch(`http://127.0.0.1:3001/rename_multiple/${newName}/dir/${directory}`, options)
+    console.log(response)
+
+  } else if (fileOrFiles.length === 1) {
+
+    const keys = Object.keys(fileOrFiles)
+    keys.forEach(key => {
+      formData.append('files', fileOrFiles[key])
+    })
+
+    const options = {
+      method: 'POST',
+      body: formData,
+    }
+
+    const response = await fetch(`http://127.0.0.1:3001/rename_one/${newName}/dir/${directory}`, options)
+    console.log(response)
+
+  } else if (fileOrFiles.length > 1) {
+
+    const keys = Object.keys(fileOrFiles)
+    keys.forEach(key => {
+      formData.append('files', fileOrFiles[key])
+    })
+
+    const options = {
+      method: 'POST',
+      body: formData,
+    }
+
+    const response = await fetch(`http://127.0.0.1:3001/rename_multiple/${newName}/dir/${directory}`, options)
+    console.log(response)
+
+  } else {
+    console.log('something isn\'t right')
   }
-
 }
 
 // check for File API support
@@ -56,9 +122,13 @@ if (window.File && window.FileReader && window.FileList && window.Blob) {
   alert('The File APIs are not fully supported in this browser.')
 }
 
-fileDropperLabel.on("dragover", handleFiles)
+fileDropperLabel.on('dragover', handleFileDrop)
 
-fileDropperLabel.on("dragenter", handleFiles)
+fileDropperLabel.on('dragenter', handleFileDrop)
 
 // handle file drop
-fileDropperLabel.on("drop", handleFiles)
+fileDropperLabel.on('drop', handleFileDrop)
+
+
+fileDropperForm.on('submit', handleSubmit)
+

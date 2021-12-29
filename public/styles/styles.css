@@ -14,10 +14,13 @@ body {
 }
 
 .main-heading {
+  align-items: center;
   border-bottom: 2px solid #666;
+  display: flex;
   font-size: 300%;
   font-weight: 100;
-  padding: 10px 25px;
+  height: 80px;
+  padding-left: 25px;
 }
 
 .content-container {
@@ -25,11 +28,14 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  min-height: calc(100vh - 80px);
   width: 100%;
 }
 
 .file-dropper-form {
-  margin-top: 200px;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
 }
 
 .file-dropper-label {
@@ -43,6 +49,32 @@ body {
 
 .file-dropper {
   cursor: pointer;
+}
+
+.user-input {
+  border: 1px solid #FFF;
+  border-radius: 3px;
+  margin-top: 30px;
+  padding: 5px;
+  width: 400px;
+}
+
+.submit-button {
+  border: 1px solid #FFF;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-top: 30px;
+  padding: 10px;
+  text-align: center;
+  width: 120px;
+}
+
+.submit-button:hover {
+  background-color: #111;
+}
+
+.submit-button:active {
+  background-color: #666;
 }
 
 .hidden {
