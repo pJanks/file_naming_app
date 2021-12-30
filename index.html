@@ -53,10 +53,5 @@
   <script src="./scripts/scripts.js"></script>
   <script>
     const socket = io()
-    socket.on('custom_refresh', (data) => {
-      setTimeout(() => {
-        location.reload()
-      }, 3000)
-    })
   </script>
 </html>
