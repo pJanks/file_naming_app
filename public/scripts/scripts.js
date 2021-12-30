@@ -29,9 +29,6 @@ const handleFileDrop = async (e) => {
       })
     } else {
       formData.append('file', fileOrFiles[0])
-      for(var pair of formData.entries()) {
-        console.log(pair[1])
-      }
     }
   }
 }
@@ -46,17 +43,12 @@ const handleSubmit = async (e) => {
 
     formData.append('files', fileDropper.prop('files')[0])
 
-    for(var pair of formData.entries()) {
-      console.log(pair[1])
-    }
-
     const options = {
       method: 'POST',
       body: formData,
     }
 
     const response = await fetch(`http://127.0.0.1:3001/rename_one/${newName}/${directory}`, options)
-    console.log(response)
 
   } else if (fileDropper.prop('files').length > 1) {
 
@@ -71,7 +63,6 @@ const handleSubmit = async (e) => {
     }
 
     const response = await fetch(`http://127.0.0.1:3001/rename_multiple/${newName}/${directory}`, options)
-    console.log(response)
 
   } else if (fileOrFiles.length === 1) {
 
@@ -86,7 +77,6 @@ const handleSubmit = async (e) => {
     }
 
     const response = await fetch(`http://127.0.0.1:3001/rename_one/${newName}/${directory}`, options)
-    console.log(response)
 
   } else if (fileOrFiles.length > 1) {
 
@@ -101,7 +91,6 @@ const handleSubmit = async (e) => {
     }
 
     const response = await fetch(`http://127.0.0.1:3001/rename_multiple/${newName}/${directory}`, options)
-    console.log(response)
 
   } else {
     alert('something isn\'t right . . . make sure you selected files . . .')
