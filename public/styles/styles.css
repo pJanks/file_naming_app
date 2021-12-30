@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;400&display=swap');
 
 body {
   font-family: 'Montserrat', sans-serif;
@@ -64,11 +64,12 @@ body {
   border-radius: 3px;
   margin-top: 30px;
   padding: 5px;
+  text-align: center;
   width: 400px;
 }
 
-.user-input:focus {
-  outline: 4px solid #FFF;
+.user-input::placeholder {
+  color: #CCC;
 }
 
 .submit-button {
@@ -87,6 +88,11 @@ body {
 
 .submit-button:active {
   background-color: #666;
+}
+
+.user-input:focus,
+.submit-button:focus {
+  outline: 2px solid #FFF;
 }
 
 .hidden {
