@@ -10,17 +10,23 @@ const port = process.env.PORT || 3001
 
 const server = http.createServer(app).listen(port, () => console.log(`server running on port ${port}`))
 
+let killServer
 
 const listener = require('socket.io')(server)
 listener.on('connection', (socket) => {
-  console.log('something connected')
-  
+  killServer = false
+  console.log('connection established')
   if (!fs.existsSync('./uploads')) {
     fs.mkdirSync('./uploads')
   }
 
   socket.on('disconnect', () => {
-    console.log('something disconnected')
+    killServer = true
+    console.log('connection disconnected')
+    const validateKillingServer = () => {
+      killServer ? server.close() : console.log('reconnected')
+    }
+    setTimeout(() => validateKillingServer(), 5000)
   })
 })
 
