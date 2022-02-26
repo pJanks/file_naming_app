@@ -24,7 +24,7 @@ listener.on('connection', (socket) => {
     killServer = true
     console.log('connection disconnected')
     const validateKillingServer = () =>  killServer ? server.close() : console.log('reconnected')
-    setTimeout(() => validateKillingServer(), 5000)
+    setTimeout(() => validateKillingServer(), 15000)
   })
 })
 
