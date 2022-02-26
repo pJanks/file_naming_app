@@ -47,8 +47,13 @@ const handleSubmit = async (e) => {
       method: 'POST',
       body: formData,
     }
-
+    try {
     const response = await fetch(`http://127.0.0.1:3001/rename_one/${newName}/${directory}`, options)
+    console.log({ response })
+    window.location.reload()
+    } catch (err) {
+      alert(`there was an error: ${err}, ${err.message}`)
+    }
 
   } else if (fileDropper.prop('files').length > 1) {
 
@@ -61,8 +66,13 @@ const handleSubmit = async (e) => {
       method: 'POST',
       body: formData,
     }
-
-    const response = await fetch(`http://127.0.0.1:3001/rename_multiple/${newName}/${directory}`, options)
+    try {
+      const response = await fetch(`http://127.0.0.1:3001/rename_multiple/${newName}/${directory}`, options)
+      console.log({ response })
+      window.location.reload()
+    } catch (err) {
+      alert(`there was an error: ${err}, ${err.message}`)
+    }
 
   } else if (fileOrFiles.length === 1) {
 
@@ -75,8 +85,13 @@ const handleSubmit = async (e) => {
       method: 'POST',
       body: formData,
     }
-
-    const response = await fetch(`http://127.0.0.1:3001/rename_one/${newName}/${directory}`, options)
+    try {
+      const response = await fetch(`http://127.0.0.1:3001/rename_one/${newName}/${directory}`, options)
+      console.log({ response })
+      window.location.reload()
+    } catch (err) {
+      alert(`there was an error: ${err}, ${err.message}`)
+    }
 
   } else if (fileOrFiles.length > 1) {
 
@@ -89,8 +104,13 @@ const handleSubmit = async (e) => {
       method: 'POST',
       body: formData,
     }
-
-    const response = await fetch(`http://127.0.0.1:3001/rename_multiple/${newName}/${directory}`, options)
+    try {
+      const response = await fetch(`http://127.0.0.1:3001/rename_multiple/${newName}/${directory}`, options)
+      console.log({ response })
+      window.location.reload()
+    } catch (err) {
+      alert(`there was an error: ${err}, ${err.message}`)
+    }
 
   } else {
     alert('something isn\'t right . . . make sure you selected files . . .')
