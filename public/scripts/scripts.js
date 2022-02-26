@@ -19,7 +19,6 @@ const fileDropperLabel = $('.file-dropper-label')
 
 const handleFileDrop = async (e) => {
   e.preventDefault()
-
   if (e.type === 'drop') {
     fileOrFiles = e.originalEvent.dataTransfer.files
     if (fileOrFiles.length > 1) {
@@ -50,7 +49,10 @@ const handleSubmit = async (e) => {
     try {
     const response = await fetch(`http://127.0.0.1:3001/rename_one/${newName}/${directory}`, options)
     console.log({ response })
-    window.location.reload()
+    $('.success-modal').removeClass('hidden')
+    setTimeout(() => {
+      window.location.reload()
+    }, 1500)
     } catch (err) {
       alert(`there was an error: ${err}, ${err.message}`)
     }
@@ -69,7 +71,10 @@ const handleSubmit = async (e) => {
     try {
       const response = await fetch(`http://127.0.0.1:3001/rename_multiple/${newName}/${directory}`, options)
       console.log({ response })
-      window.location.reload()
+      $('.success-modal').removeClass('hidden')
+      setTimeout(() => {
+        window.location.reload()
+      }, 1500)
     } catch (err) {
       alert(`there was an error: ${err}, ${err.message}`)
     }
@@ -88,7 +93,10 @@ const handleSubmit = async (e) => {
     try {
       const response = await fetch(`http://127.0.0.1:3001/rename_one/${newName}/${directory}`, options)
       console.log({ response })
-      window.location.reload()
+      $('.success-modal').removeClass('hidden')
+      setTimeout(() => {
+        window.location.reload()
+      }, 1500)
     } catch (err) {
       alert(`there was an error: ${err}, ${err.message}`)
     }
@@ -107,7 +115,10 @@ const handleSubmit = async (e) => {
     try {
       const response = await fetch(`http://127.0.0.1:3001/rename_multiple/${newName}/${directory}`, options)
       console.log({ response })
-      window.location.reload()
+      $('.success-modal-wrapper').removeClass('hidden')
+      setTimeout(() => {
+        window.location.reload()
+      }, 1500)
     } catch (err) {
       alert(`there was an error: ${err}, ${err.message}`)
     }
