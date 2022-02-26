@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;400;700&display=swap');
 
 body {
   font-family: 'Montserrat', sans-serif;
@@ -93,6 +93,29 @@ body {
 .user-input:focus,
 .submit-button:focus {
   outline: 2px solid #FFF;
+}
+
+.success-modal-wrapper {
+  align-items: center;
+  background-color: #000;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  z-index: 1;
+}
+
+.success-modal {
+  background-color: #000;
+  border: 2px solid #666;
+  color: #0F0;
+  font-size: 400%;
+  font-weight: 700;
+  padding: 80px 120px;
+
 }
 
 .hidden {
